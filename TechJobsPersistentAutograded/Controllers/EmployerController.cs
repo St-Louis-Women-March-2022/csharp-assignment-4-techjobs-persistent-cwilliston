@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TechJobsPersistentAutograded.Data;
 using TechJobsPersistentAutograded.Models;
 using TechJobsPersistentAutograded.ViewModels;
@@ -14,25 +15,53 @@ namespace TechJobsPersistentAutograded.Controllers
     public class EmployerController : Controller
     {
 
+        private JobRepository _repo;
+
+
+        public EmployerController(JobRepository repo)
+        {
+            _repo = repo;
+        }
+
+
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Employer> employers = _repo.GetAllEmployers();
+
+            return View(employers);
         }
 
         public IActionResult Add()
         {
-            return View();
+            Employer employer = new Employer();
+
+            return View(employer);
         }
 
-        public IActionResult ProcessAddEmployerForm()
+        public IActionResult ProcessAddEmployerForm(Employer employer)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+                _repo.AddNewEmployer(employer);
+                _repo.SaveChanges();
+
+                return Redirect("/Employer/");
+
+            }
+            
+            
+            return View("Add", employer);
         }
 
         public IActionResult About(int id)
         {
-            return View();
+            Employer theEmployer = _repo.FindEmployerById(id);
+            
+
+
+            return View(theEmployer);
         }
     }
 }

@@ -1,4 +1,7 @@
 ﻿--Part 1
+--INT Id,
+--VARCHAR Name,
+--INT EmployerId
 
 --Part 2
 
