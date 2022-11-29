@@ -10,6 +10,11 @@ namespace TechJobsPersistentAutograded.ViewModels
         [Required]
         public string Location { get; set; }
 
+        public AddEmployerViewModel()
+        {
+
+        }
+        
         public AddEmployerViewModel(string name, string location)
         {
             Name = name;

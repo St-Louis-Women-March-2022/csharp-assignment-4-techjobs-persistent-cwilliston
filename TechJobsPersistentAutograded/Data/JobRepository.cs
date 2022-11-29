@@ -64,13 +64,6 @@ namespace TechJobsPersistentAutograded.Data
             return _context.Employers.Find(id);
         }
 
-        /////////////////////////////////////////
-        public virtual Employer FindEmployerByName(string name)
-        {
-            return _context.Employers.Find(name);
-        }
-
-        ///////////////////////////////////
 
         public virtual void AddNewEmployer(Employer newEmployer)       
         {

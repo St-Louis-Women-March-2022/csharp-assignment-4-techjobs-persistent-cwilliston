@@ -23,7 +23,7 @@ namespace TechJobsPersistentAutograded.ViewModels
         }
         
         
-        public AddJobViewModel(List<Employer> employerList)
+        public AddJobViewModel(List<Employer> employerList, List<Skill> skills)
         {
             Employers = new List<SelectListItem>();
             foreach (var employer in employerList)
@@ -37,6 +37,7 @@ namespace TechJobsPersistentAutograded.ViewModels
                 );
             }
 
+            Skills = skills;
 
         }
     }

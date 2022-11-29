@@ -40,14 +40,16 @@ namespace TechJobsPersistentAutograded.Controllers
         public IActionResult AddJob()
         {
             List<Employer> employers = _repo.GetAllEmployers().ToList();
-            AddJobViewModel addJobViewModel = new AddJobViewModel(employers);
+            List<Skill> skills = _repo.GetAllSkills().ToList();
+
+            AddJobViewModel addJobViewModel = new AddJobViewModel(employers, skills);
             
             return View(addJobViewModel);
         }
 
 
 
-        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel)
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel, string[] selectedSkills)
         {
 
             if (ModelState.IsValid)
@@ -58,6 +60,20 @@ namespace TechJobsPersistentAutograded.Controllers
                     Name = addJobViewModel.Name,
                     EmployerId = addJobViewModel.EmployerId
                 };
+
+                foreach(var skill in selectedSkills)
+                {
+                                        
+                    JobSkill theJobSkill = new JobSkill
+                    {
+                        Job = theJob,
+                        SkillId = Int32.Parse(skill)
+                    };
+
+                    _repo.AddNewJobSkill(theJobSkill);
+
+                }
+
 
                 _repo.AddNewJob(theJob);
                 _repo.SaveChanges();
