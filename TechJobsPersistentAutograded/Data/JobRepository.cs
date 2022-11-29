@@ -64,6 +64,7 @@ namespace TechJobsPersistentAutograded.Data
             return _context.Employers.Find(id);
         }
 
+
         public virtual void AddNewEmployer(Employer newEmployer)       
         {
             _context.Employers.Add(newEmployer);
