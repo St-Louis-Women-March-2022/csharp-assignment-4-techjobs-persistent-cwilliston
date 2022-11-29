@@ -19,9 +19,10 @@ namespace TechJobsPersistentAutograded.Models
         {
         }
 
-        public Job(string name)
+        public Job(string name, int employerId)
         {
             Name = name;
+            EmployerId = employerId;
         }
     }
 }

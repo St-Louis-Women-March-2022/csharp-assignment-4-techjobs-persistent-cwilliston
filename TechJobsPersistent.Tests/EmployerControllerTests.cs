@@ -161,7 +161,7 @@ namespace TaskTwo.Tests
 // --------- About Method Tests --------------------------------
 
         [Fact]
-        public void AboutMethod_FindsEmployerById()
+1        public void AboutMethod_FindsEmployerById()
         {
             //arrange
             Type testType = typeof(EmployerController);

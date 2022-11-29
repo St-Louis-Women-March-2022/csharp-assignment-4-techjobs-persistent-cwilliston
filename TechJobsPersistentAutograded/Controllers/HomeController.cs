@@ -19,15 +19,18 @@ namespace TechJobsPersistentAutograded.Controllers
     {
         private JobRepository _repo;
 
+
         public HomeController(JobRepository repo)
         {
             _repo = repo;
+
         }
 
         public IActionResult Index()
 
         {
             IEnumerable<Job> jobs = _repo.GetAllJobs();
+
 
             return View(jobs);
         }
@@ -36,14 +39,29 @@ namespace TechJobsPersistentAutograded.Controllers
         [HttpGet("/Add")]
         public IActionResult AddJob()
         {
-            return View();
+            List<Employer> employers = _repo.GetAllEmployers().ToList();
+            AddJobViewModel addJobViewModel = new AddJobViewModel(employers);
+            
+            return View(addJobViewModel);
         }
 
 
-        public IActionResult ProcessAddJobForm()
+
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel)
         {
+
             if (ModelState.IsValid)
             {
+
+                Job theJob = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    EmployerId = addJobViewModel.EmployerId
+                };
+
+                _repo.AddNewJob(theJob);
+                _repo.SaveChanges();
+
                 return Redirect("Index");
             }
 
