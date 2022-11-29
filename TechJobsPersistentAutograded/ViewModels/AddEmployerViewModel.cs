@@ -4,10 +4,12 @@ namespace TechJobsPersistentAutograded.ViewModels
 {
     public class AddEmployerViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Name is required.")]
+        [StringLength(50, MinimumLength = 0)]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Location is required.")]
+        [StringLength(50, MinimumLength=0)]
         public string Location { get; set; }
 
         public AddEmployerViewModel()

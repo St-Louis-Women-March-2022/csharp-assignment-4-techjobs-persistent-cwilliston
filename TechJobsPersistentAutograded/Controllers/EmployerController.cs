@@ -34,25 +34,31 @@ namespace TechJobsPersistentAutograded.Controllers
 
         public IActionResult Add()
         {
-            Employer employer = new Employer();
+            AddEmployerViewModel viewModel = new AddEmployerViewModel();
 
-            return View(employer);
+            return View(viewModel);
         }
 
-        public IActionResult ProcessAddEmployerForm(Employer employer)
+        public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
             if (ModelState.IsValid)
             {
 
-                _repo.AddNewEmployer(employer);
+                Employer theEmployer = new Employer
+                {
+                    Name = addEmployerViewModel.Name,
+                    Location = addEmployerViewModel.Location
+                };
+
+                _repo.AddNewEmployer(theEmployer);
                 _repo.SaveChanges();
 
-                return Redirect("/Employer/");
+                return Redirect("/Employer");
 
             }
             
             
-            return View("Add", employer);
+            return View("Add", addEmployerViewModel);
         }
 
         public IActionResult About(int id)

@@ -81,7 +81,7 @@ namespace TechJobsPersistentAutograded.Controllers
                 return Redirect("Index");
             }
 
-            return View("Add");
+            return View("Add", addJobViewModel);
         }
 
 
